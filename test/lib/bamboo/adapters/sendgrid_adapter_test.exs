@@ -119,7 +119,7 @@ defmodule Bamboo.SendgridAdapterTest do
   test "raises if the response is not a success" do
     email = new_email(from: "INVALID_EMAIL")
 
-    assert_raise Bamboo.SendgridAdapter.ApiError, fn ->
+    assert_raise Bamboo.ApiError, fn ->
       email |> SendgridAdapter.deliver(@config)
     end
   end
@@ -127,7 +127,7 @@ defmodule Bamboo.SendgridAdapterTest do
   test "removes api key from error output" do
     email = new_email(from: "INVALID_EMAIL")
 
-    assert_raise Bamboo.SendgridAdapter.ApiError, ~r/"key" => "\[FILTERED\]"/, fn ->
+    assert_raise Bamboo.ApiError, ~r/"key" => "\[FILTERED\]"/, fn ->
       email |> SendgridAdapter.deliver(@config)
     end
   end
